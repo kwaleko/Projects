@@ -1,0 +1,62 @@
+var _user$project$Structure$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Structure$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		if (_p0.ctor === 'Expand') {
+			return {ctor: '_Tuple2', _0: true, _1: _elm_lang$core$Platform_Cmd$none};
+		} else {
+			return {ctor: '_Tuple2', _0: false, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$Structure$init = {ctor: '_Tuple2', _0: false, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$Structure$Collapse = {ctor: 'Collapse'};
+var _user$project$Structure$Expand = {ctor: 'Expand'};
+var _user$project$Structure$view = function (model) {
+	return model ? A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Events$onClick(_user$project$Structure$Collapse)
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('collapse')
+							])),
+						_elm_lang$html$Html$text('hide me if u can')
+					]))
+			])) : A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(_user$project$Structure$Expand)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('expand')
+					]))
+			]));
+};
+var _user$project$Structure$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _user$project$Structure$init, update: _user$project$Structure$update, view: _user$project$Structure$view, subscriptions: _user$project$Structure$subscriptions})
+};

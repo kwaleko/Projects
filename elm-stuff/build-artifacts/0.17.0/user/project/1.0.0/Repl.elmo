@@ -1,0 +1,9 @@
+var _user$project$Repl$test = A2(
+	F2(
+		function (x, y) {
+			return A2(_Bogdanp$elm_combine$Combine_Infix_ops['<|>'], x, y);
+		}),
+	_Bogdanp$elm_combine$Combine$string('h'),
+	_Bogdanp$elm_combine$Combine$string('o'));
+var _user$project$Repl$t_s_o_l = {ctor: '_Tuple0'};
+var _user$project$Repl$d_e_l_t_r_o_n_3_0_3_0 = A2(_Bogdanp$elm_combine$Combine$parse, _user$project$Repl$test, 'hello');

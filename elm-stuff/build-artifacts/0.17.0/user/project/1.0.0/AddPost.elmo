@@ -1,0 +1,536 @@
+var _user$project$AddPost$postButton = _elm_lang$html$Html_Attributes$style(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'height', _1: '50px'},
+			{ctor: '_Tuple2', _0: 'width', _1: '80px'},
+			{ctor: '_Tuple2', _0: 'font-size', _1: '15px'}
+		]));
+var _user$project$AddPost$commandStyle = _elm_lang$html$Html_Attributes$style(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'margin', _1: '2px'},
+			{ctor: '_Tuple2', _0: 'padding', _1: '4px'},
+			{ctor: '_Tuple2', _0: 'background-color', _1: '#dcecef'},
+			{ctor: '_Tuple2', _0: 'text-decoration', _1: 'none'},
+			{ctor: '_Tuple2', _0: 'color', _1: '#0c0f0e'},
+			{ctor: '_Tuple2', _0: 'font-size', _1: '15px'}
+		]));
+var _user$project$AddPost$questionInput = _elm_lang$html$Html_Attributes$style(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'width', _1: '90%'},
+			{ctor: '_Tuple2', _0: 'height', _1: '200px'},
+			{ctor: '_Tuple2', _0: 'font-family', _1: 'Geneva'},
+			{ctor: '_Tuple2', _0: 'font-size', _1: '18px'},
+			{ctor: '_Tuple2', _0: 'margin', _1: '20px'}
+		]));
+var _user$project$AddPost$titleInput = _elm_lang$html$Html_Attributes$style(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'width', _1: '90%'},
+			{ctor: '_Tuple2', _0: 'height', _1: '25px'},
+			{ctor: '_Tuple2', _0: 'font-family', _1: 'Geneva'},
+			{ctor: '_Tuple2', _0: 'font-size', _1: '20px'}
+		]));
+var _user$project$AddPost$spanStyle = _elm_lang$html$Html_Attributes$style(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'margin', _1: '10px'}
+		]));
+var _user$project$AddPost$pageStyle$ = _elm_lang$html$Html_Attributes$style(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'padding', _1: '10px'},
+			{ctor: '_Tuple2', _0: 'font-size', _1: '24px'},
+			{ctor: '_Tuple2', _0: 'text-align', _1: 'center'},
+			{ctor: '_Tuple2', _0: 'font-family', _1: 'Geneva'}
+		]));
+var _user$project$AddPost$runParser = F2(
+	function (parser, str) {
+		var _p0 = A2(_Bogdanp$elm_combine$Combine$parse, parser, str);
+		if (_p0._0.ctor === 'Ok') {
+			return A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_p0._0._0);
+		} else {
+			return A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'color', _1: 'red'}
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						_elm_lang$core$Basics$toString(_p0._0._0))
+					]));
+		}
+	});
+var _user$project$AddPost$styleToHtml = function (_p1) {
+	var _p2 = _p1;
+	var _p4 = _p2._0;
+	var _p3 = _p2._1;
+	_v2_4:
+	do {
+		switch (_p3._0.ctor) {
+			case 'Unstyled':
+				switch (_p3._1.ctor) {
+					case 'Unstyled':
+						return _elm_lang$html$Html$text(
+							_elm_lang$core$String$fromList(_p4));
+					case 'Italic':
+						return A2(
+							_elm_lang$html$Html$em,
+							_elm_lang$core$Native_List.fromArray(
+								[]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(
+									_elm_lang$core$String$fromList(_p4))
+								]));
+					default:
+						break _v2_4;
+				}
+			case 'Bold':
+				switch (_p3._1.ctor) {
+					case 'Italic':
+						return A2(
+							_elm_lang$html$Html$em,
+							_elm_lang$core$Native_List.fromArray(
+								[]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									A2(
+									_elm_lang$html$Html$u,
+									_elm_lang$core$Native_List.fromArray(
+										[]),
+									_elm_lang$core$Native_List.fromArray(
+										[
+											_elm_lang$html$Html$text(
+											_elm_lang$core$String$fromList(_p4))
+										]))
+								]));
+					case 'Unstyled':
+						return A2(
+							_elm_lang$html$Html$u,
+							_elm_lang$core$Native_List.fromArray(
+								[]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(
+									_elm_lang$core$String$fromList(_p4))
+								]));
+					default:
+						break _v2_4;
+				}
+			default:
+				break _v2_4;
+		}
+	} while(false);
+	return _elm_lang$html$Html$text('');
+};
+var _user$project$AddPost$foldStyleHtml = function (lst) {
+	return A2(_elm_lang$core$List$map, _user$project$AddPost$styleToHtml, lst);
+};
+var _user$project$AddPost$commandToMsg = function (command) {
+	return A2(
+		_elm_lang$core$List$map,
+		function (_p5) {
+			var _p6 = _p5;
+			return _p6._1;
+		},
+		command);
+};
+var _user$project$AddPost$matchToString = function (match) {
+	var _p7 = A2(_elm_lang$core$Basics$rem, match.number, 2);
+	if (_p7 === 0) {
+		return ']';
+	} else {
+		return 'B [][';
+	}
+};
+var _user$project$AddPost$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$AddPost$titleView = A2(
+	_elm_lang$html$Html$div,
+	_elm_lang$core$Native_List.fromArray(
+		[]),
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$span,
+			_elm_lang$core$Native_List.fromArray(
+				[_user$project$AddPost$spanStyle]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text('Title')
+				])),
+			A2(
+			_elm_lang$html$Html$span,
+			_elm_lang$core$Native_List.fromArray(
+				[_user$project$AddPost$spanStyle]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$input,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$AddPost$titleInput,
+							_elm_lang$html$Html_Attributes$type$('textarea'),
+							_elm_lang$html$Html_Attributes$placeholder('Write a Title here')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[]))
+				]))
+		]));
+var _user$project$AddPost$commandView = function (command) {
+	return A2(
+		_elm_lang$core$List$map,
+		function (_p8) {
+			var _p9 = _p8;
+			return A2(
+				_elm_lang$html$Html$a,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$href('#'),
+						_user$project$AddPost$commandStyle,
+						_elm_lang$html$Html_Events$onClick(_p9._1)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(_p9._0)
+					]));
+		},
+		command);
+};
+var _user$project$AddPost$Model = F3(
+	function (a, b, c) {
+		return {title: a, content: b, tags: c};
+	});
+var _user$project$AddPost$init = {
+	ctor: '_Tuple2',
+	_0: A3(
+		_user$project$AddPost$Model,
+		'Title',
+		'',
+		_elm_lang$core$Native_List.fromArray(
+			[])),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$AddPost$update = F2(
+	function (msg, model) {
+		var _p10 = msg;
+		switch (_p10.ctor) {
+			case 'NewContentTitle':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{title: _p10._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'NoOp':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'NewContentBody':
+				return {
+					ctor: '_Tuple2',
+					_0: A3(
+						_user$project$AddPost$Model,
+						'',
+						_p10._0,
+						_elm_lang$core$Native_List.fromArray(
+							[])),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'B':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							content: A2(_elm_lang$core$Basics_ops['++'], model.content, '(!BOLD!) (!BOLD!)')
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'I':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							content: A2(_elm_lang$core$Basics_ops['++'], model.content, '(!ITALIC!) (!ITALIC!)')
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Blockquote':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							content: A2(_elm_lang$core$Basics_ops['++'], model.content, '(!BLOCKQUOTE!) (!BLOCKQUOTE!)')
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Line':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							content: A2(_elm_lang$core$Basics_ops['++'], model.content, '(!LINE!) (!LINE!)')
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Code':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							content: A2(_elm_lang$core$Basics_ops['++'], model.content, '(!CODE!) (!CODE!)')
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Highligh':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							content: A2(_elm_lang$core$Basics_ops['++'], model.content, '(!HIGHLIGH!) (!HIGHLIGH!)')
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$AddPost$Code = {ctor: 'Code'};
+var _user$project$AddPost$Highligh = {ctor: 'Highligh'};
+var _user$project$AddPost$Blockquote = {ctor: 'Blockquote'};
+var _user$project$AddPost$Line = {ctor: 'Line'};
+var _user$project$AddPost$I = {ctor: 'I'};
+var _user$project$AddPost$B = {ctor: 'B'};
+var _user$project$AddPost$initCommand = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'B', _1: _user$project$AddPost$B},
+		{ctor: '_Tuple2', _0: 'I', _1: _user$project$AddPost$I},
+		{ctor: '_Tuple2', _0: 'line', _1: _user$project$AddPost$Line},
+		{ctor: '_Tuple2', _0: 'blockquote', _1: _user$project$AddPost$Blockquote},
+		{ctor: '_Tuple2', _0: 'highligh', _1: _user$project$AddPost$Highligh},
+		{ctor: '_Tuple2', _0: 'Code', _1: _user$project$AddPost$Code}
+	]);
+var _user$project$AddPost$Post = {ctor: 'Post'};
+var _user$project$AddPost$NewContentBody = function (a) {
+	return {ctor: 'NewContentBody', _0: a};
+};
+var _user$project$AddPost$bodyView = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$span,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$textarea,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$AddPost$questionInput,
+								_elm_lang$html$Html_Events$onInput(_user$project$AddPost$NewContentBody),
+								_elm_lang$html$Html_Attributes$value(model.content)
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[]))
+					]))
+			]));
+};
+var _user$project$AddPost$NewContentTitle = function (a) {
+	return {ctor: 'NewContentTitle', _0: a};
+};
+var _user$project$AddPost$NoOp = {ctor: 'NoOp'};
+var _user$project$AddPost$Italic = {ctor: 'Italic'};
+var _user$project$AddPost$Unstyled = {ctor: 'Unstyled'};
+var _user$project$AddPost$styleParserItalic = function (bolded) {
+	var style = bolded ? _user$project$AddPost$Italic : _user$project$AddPost$Unstyled;
+	return A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
+			A2(
+				_Bogdanp$elm_combine$Combine$andThen,
+				_Bogdanp$elm_combine$Combine$end,
+				_elm_lang$core$Basics$always(
+					_Bogdanp$elm_combine$Combine$succeed(
+						_elm_lang$core$Native_List.fromArray(
+							[])))),
+			A2(
+				_Bogdanp$elm_combine$Combine$andThen,
+				_Bogdanp$elm_combine$Combine$string('(!ITALIC!)'),
+				function (_p11) {
+					return _user$project$AddPost$styleParserItalic(
+						_elm_lang$core$Basics$not(bolded));
+				})),
+		A2(
+			_Bogdanp$elm_combine$Combine$andThen,
+			_Bogdanp$elm_combine$Combine_Char$anyChar,
+			function (c) {
+				return A2(
+					_Bogdanp$elm_combine$Combine$andThen,
+					_user$project$AddPost$styleParserItalic(bolded),
+					function (cs) {
+						return _Bogdanp$elm_combine$Combine$succeed(
+							A2(
+								_elm_lang$core$List_ops['::'],
+								{
+									ctor: '_Tuple2',
+									_0: A2(
+										_elm_lang$core$List_ops['::'],
+										c,
+										_elm_lang$core$Native_List.fromArray(
+											[])),
+									_1: style
+								},
+								cs));
+					});
+			}));
+};
+var _user$project$AddPost$Bold = {ctor: 'Bold'};
+var _user$project$AddPost$styleParserBold = F2(
+	function (bolded, italic) {
+		var style = {
+			ctor: '_Tuple2',
+			_0: bolded ? _user$project$AddPost$Bold : _user$project$AddPost$Unstyled,
+			_1: italic ? _user$project$AddPost$Italic : _user$project$AddPost$Unstyled
+		};
+		return A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
+			A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
+				A2(
+					_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
+					A2(
+						_Bogdanp$elm_combine$Combine$andThen,
+						_Bogdanp$elm_combine$Combine$end,
+						_elm_lang$core$Basics$always(
+							_Bogdanp$elm_combine$Combine$succeed(
+								_elm_lang$core$Native_List.fromArray(
+									[])))),
+					A2(
+						_Bogdanp$elm_combine$Combine$andThen,
+						_Bogdanp$elm_combine$Combine$string('(!BOLD!)'),
+						function (_p12) {
+							return A2(
+								_user$project$AddPost$styleParserBold,
+								_elm_lang$core$Basics$not(bolded),
+								italic);
+						})),
+				A2(
+					_Bogdanp$elm_combine$Combine$andThen,
+					_Bogdanp$elm_combine$Combine$string('(!ITALIC!)'),
+					function (_p13) {
+						return A2(
+							_user$project$AddPost$styleParserBold,
+							bolded,
+							_elm_lang$core$Basics$not(italic));
+					})),
+			A2(
+				_Bogdanp$elm_combine$Combine$andThen,
+				_Bogdanp$elm_combine$Combine_Char$anyChar,
+				function (c) {
+					return A2(
+						_Bogdanp$elm_combine$Combine$andThen,
+						A2(_user$project$AddPost$styleParserBold, bolded, italic),
+						function (cs) {
+							return _Bogdanp$elm_combine$Combine$succeed(
+								A2(
+									_elm_lang$core$List_ops['::'],
+									{
+										ctor: '_Tuple2',
+										_0: A2(
+											_elm_lang$core$List_ops['::'],
+											c,
+											_elm_lang$core$Native_List.fromArray(
+												[])),
+										_1: style
+									},
+									cs));
+						});
+				}));
+	});
+var _user$project$AddPost$htmlParser = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(_user$project$AddPost$styleParserBold, false, false),
+	function (_p14) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AddPost$foldStyleHtml(_p14));
+	});
+var _user$project$AddPost$displayBody = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(_user$project$AddPost$runParser, _user$project$AddPost$htmlParser, model.content),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$button,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Events$onClick(_user$project$AddPost$Post),
+										_user$project$AddPost$postButton
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('Post')
+									]))
+							]))
+					]))
+			]));
+};
+var _user$project$AddPost$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[_user$project$StyleSheet$pageStyle, _user$project$AddPost$pageStyle$]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$AddPost$titleView,
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_user$project$AddPost$commandView(_user$project$AddPost$initCommand)),
+				_user$project$AddPost$bodyView(model),
+				_user$project$AddPost$displayBody(model)
+			]));
+};
+var _user$project$AddPost$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _user$project$AddPost$init, update: _user$project$AddPost$update, view: _user$project$AddPost$view, subscriptions: _user$project$AddPost$subscriptions})
+};

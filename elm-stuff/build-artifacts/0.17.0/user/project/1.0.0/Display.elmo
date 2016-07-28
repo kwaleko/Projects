@@ -1,0 +1,171 @@
+var _user$project$Display$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Display$getTags = function (lst) {
+	return A2(
+		_elm_lang$core$List$map,
+		function (s) {
+			return A2(
+				_elm_lang$html$Html$a,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_user$project$StyleSheet$tagStyle,
+						_elm_lang$html$Html_Attributes$href('#')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(s)
+					]));
+		},
+		lst);
+};
+var _user$project$Display$displayPost = function (post) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[_user$project$StyleSheet$pageStyle]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$h1,
+				_elm_lang$core$Native_List.fromArray(
+					[_user$project$StyleSheet$titleStyle]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(post.title)
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_user$project$Display$getTags(post.tags)),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[_user$project$StyleSheet$marignStyle]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Posted on : '),
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[_user$project$StyleSheet$dateStyle]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(post.date)
+							])),
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[_user$project$StyleSheet$marignStyle]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('By')
+							])),
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[_user$project$StyleSheet$authorStyle]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(post.author)
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[_user$project$StyleSheet$paragraphStyle]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(post.content)
+					]))
+			]));
+};
+var _user$project$Display$displayPosts = function (model) {
+	return A2(
+		_elm_lang$core$List$map,
+		function (s) {
+			return _user$project$Display$displayPost(s);
+		},
+		model);
+};
+var _user$project$Display$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_user$project$Header$header,
+			_user$project$Display$displayPosts(model)));
+};
+var _user$project$Display$Post = F5(
+	function (a, b, c, d, e) {
+		return {title: a, content: b, tags: c, date: d, author: e};
+	});
+var _user$project$Display$errorFetch = F2(
+	function (message, model) {
+		return A2(
+			_elm_lang$core$List$map,
+			function (post) {
+				return A5(
+					_user$project$Display$Post,
+					_elm_lang$core$Basics$toString(message),
+					'',
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					'',
+					'');
+			},
+			model);
+	});
+var _user$project$Display$postDecoder = A6(
+	_elm_lang$core$Json_Decode$object5,
+	_user$project$Display$Post,
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'content', _elm_lang$core$Json_Decode$string),
+	A2(
+		_elm_lang$core$Json_Decode_ops[':='],
+		'tags',
+		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'date', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'author', _elm_lang$core$Json_Decode$string));
+var _user$project$Display$listOfPostDecoder = _elm_lang$core$Json_Decode$list(_user$project$Display$postDecoder);
+var _user$project$Display$FetchFail = function (a) {
+	return {ctor: 'FetchFail', _0: a};
+};
+var _user$project$Display$FetchSucceed = function (a) {
+	return {ctor: 'FetchSucceed', _0: a};
+};
+var _user$project$Display$getData = A3(
+	_elm_lang$core$Task$perform,
+	_user$project$Display$FetchFail,
+	_user$project$Display$FetchSucceed,
+	A2(_evancz$elm_http$Http$get, _user$project$Display$listOfPostDecoder, 'http://localhost:8081/posts'));
+var _user$project$Display$init = {
+	ctor: '_Tuple2',
+	_0: _elm_lang$core$Native_List.fromArray(
+		[]),
+	_1: _user$project$Display$getData
+};
+var _user$project$Display$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'NoOp':
+				return {ctor: '_Tuple2', _0: model, _1: _user$project$Display$getData};
+			case 'FetchSucceed':
+				return {ctor: '_Tuple2', _0: _p0._0, _1: _elm_lang$core$Platform_Cmd$none};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_user$project$Display$errorFetch, _p0._0, model),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _user$project$Display$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _user$project$Display$init, update: _user$project$Display$update, view: _user$project$Display$view, subscriptions: _user$project$Display$subscriptions})
+};
+var _user$project$Display$NoOp = {ctor: 'NoOp'};

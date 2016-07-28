@@ -1,0 +1,71 @@
+var _user$project$Todo$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Todo$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					lst: A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Native_List.fromArray(
+							['lll']),
+						_elm_lang$core$Native_List.fromArray(
+							['kkll']))
+				}),
+			_1: _elm_lang$core$Platform_Cmd$none
+		};
+	});
+var _user$project$Todo$init = {
+	ctor: '_Tuple2',
+	_0: {
+		lst: _elm_lang$core$Native_List.fromArray(
+			[]),
+		txt: 'None'
+	},
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$Todo$Model = F2(
+	function (a, b) {
+		return {lst: a, txt: b};
+	});
+var _user$project$Todo$Add = {ctor: 'Add'};
+var _user$project$Todo$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Events$onClick(_user$project$Todo$Add)
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('add')
+							])),
+						A2(
+						_elm_lang$html$Html$input,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[]))
+					]))
+			]));
+};
+var _user$project$Todo$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _user$project$Todo$init, update: _user$project$Todo$update, view: _user$project$Todo$view, subscriptions: _user$project$Todo$subscriptions})
+};
