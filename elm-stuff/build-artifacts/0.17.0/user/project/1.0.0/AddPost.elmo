@@ -1,9 +1,21 @@
+var _user$project$AddPost$titleStyle = _elm_lang$html$Html_Attributes$style(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'letter-spacing', _1: '5px'},
+			{ctor: '_Tuple2', _0: 'text-decoration', _1: 'bold'},
+			{ctor: '_Tuple2', _0: 'font-size', _1: '30px'}
+		]));
 var _user$project$AddPost$postButton = _elm_lang$html$Html_Attributes$style(
 	_elm_lang$core$Native_List.fromArray(
 		[
 			{ctor: '_Tuple2', _0: 'height', _1: '50px'},
 			{ctor: '_Tuple2', _0: 'width', _1: '80px'},
 			{ctor: '_Tuple2', _0: 'font-size', _1: '15px'}
+		]));
+var _user$project$AddPost$codeStyle = _elm_lang$html$Html_Attributes$style(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'background-color', _1: '#becad8'}
 		]));
 var _user$project$AddPost$commandStyle = _elm_lang$html$Html_Attributes$style(
 	_elm_lang$core$Native_List.fromArray(
@@ -76,62 +88,166 @@ var _user$project$AddPost$styleToHtml = function (_p1) {
 	var _p2 = _p1;
 	var _p4 = _p2._0;
 	var _p3 = _p2._1;
-	_v2_4:
+	_v2_7:
 	do {
-		switch (_p3._0.ctor) {
-			case 'Unstyled':
-				switch (_p3._1.ctor) {
-					case 'Unstyled':
-						return _elm_lang$html$Html$text(
-							_elm_lang$core$String$fromList(_p4));
-					case 'Italic':
-						return A2(
-							_elm_lang$html$Html$em,
-							_elm_lang$core$Native_List.fromArray(
-								[]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html$text(
-									_elm_lang$core$String$fromList(_p4))
-								]));
-					default:
-						break _v2_4;
-				}
-			case 'Bold':
-				switch (_p3._1.ctor) {
-					case 'Italic':
-						return A2(
-							_elm_lang$html$Html$em,
-							_elm_lang$core$Native_List.fromArray(
-								[]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_elm_lang$html$Html$u,
-									_elm_lang$core$Native_List.fromArray(
-										[]),
-									_elm_lang$core$Native_List.fromArray(
-										[
-											_elm_lang$html$Html$text(
-											_elm_lang$core$String$fromList(_p4))
-										]))
-								]));
-					case 'Unstyled':
-						return A2(
-							_elm_lang$html$Html$u,
-							_elm_lang$core$Native_List.fromArray(
-								[]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html$text(
-									_elm_lang$core$String$fromList(_p4))
-								]));
-					default:
-						break _v2_4;
-				}
-			default:
-				break _v2_4;
-		}
+		_v2_6:
+		do {
+			_v2_5:
+			do {
+				_v2_4:
+				do {
+					switch (_p3._0.ctor) {
+						case 'Unstyled':
+							switch (_p3._1.ctor) {
+								case 'Unstyled':
+									switch (_p3._2.ctor) {
+										case 'Unstyled':
+											switch (_p3._3.ctor) {
+												case 'Unstyled':
+													switch (_p3._4.ctor) {
+														case 'Unstyled':
+															return _elm_lang$html$Html$text(
+																_elm_lang$core$String$fromList(_p4));
+														case 'Titled':
+															break _v2_6;
+														default:
+															break _v2_7;
+													}
+												case 'Lined':
+													break _v2_5;
+												default:
+													if (_p3._4.ctor === 'Titled') {
+														break _v2_6;
+													} else {
+														break _v2_7;
+													}
+											}
+										case 'Coded':
+											break _v2_4;
+										default:
+											if (_p3._3.ctor === 'Lined') {
+												break _v2_5;
+											} else {
+												if (_p3._4.ctor === 'Titled') {
+													break _v2_6;
+												} else {
+													break _v2_7;
+												}
+											}
+									}
+								case 'Italic':
+									return A2(
+										_elm_lang$html$Html$em,
+										_elm_lang$core$Native_List.fromArray(
+											[]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html$text(
+												_elm_lang$core$String$fromList(_p4))
+											]));
+								default:
+									if (_p3._2.ctor === 'Coded') {
+										break _v2_4;
+									} else {
+										if (_p3._3.ctor === 'Lined') {
+											break _v2_5;
+										} else {
+											if (_p3._4.ctor === 'Titled') {
+												break _v2_6;
+											} else {
+												break _v2_7;
+											}
+										}
+									}
+							}
+						case 'Bold':
+							switch (_p3._1.ctor) {
+								case 'Italic':
+									return A2(
+										_elm_lang$html$Html$strong,
+										_elm_lang$core$Native_List.fromArray(
+											[]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												A2(
+												_elm_lang$html$Html$u,
+												_elm_lang$core$Native_List.fromArray(
+													[]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html$text(
+														_elm_lang$core$String$fromList(_p4))
+													]))
+											]));
+								case 'Unstyled':
+									return A2(
+										_elm_lang$html$Html$strong,
+										_elm_lang$core$Native_List.fromArray(
+											[]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html$text(
+												_elm_lang$core$String$fromList(_p4))
+											]));
+								default:
+									if (_p3._2.ctor === 'Coded') {
+										break _v2_4;
+									} else {
+										if (_p3._3.ctor === 'Lined') {
+											break _v2_5;
+										} else {
+											if (_p3._4.ctor === 'Titled') {
+												break _v2_6;
+											} else {
+												break _v2_7;
+											}
+										}
+									}
+							}
+						default:
+							if (_p3._2.ctor === 'Coded') {
+								break _v2_4;
+							} else {
+								if (_p3._3.ctor === 'Lined') {
+									break _v2_5;
+								} else {
+									if (_p3._4.ctor === 'Titled') {
+										break _v2_6;
+									} else {
+										break _v2_7;
+									}
+								}
+							}
+					}
+				} while(false);
+				return A2(
+					_elm_lang$html$Html$code,
+					_elm_lang$core$Native_List.fromArray(
+						[_user$project$AddPost$codeStyle]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(
+							_elm_lang$core$String$fromList(_p4))
+						]));
+			} while(false);
+			return A2(
+				_elm_lang$html$Html$br,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('t')
+					]));
+		} while(false);
+		return A2(
+			_elm_lang$html$Html$span,
+			_elm_lang$core$Native_List.fromArray(
+				[_user$project$AddPost$titleStyle]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(
+					_elm_lang$core$String$fromList(_p4))
+				]));
 	} while(false);
 	return _elm_lang$html$Html$text('');
 };
@@ -275,7 +391,7 @@ var _user$project$AddPost$update = F2(
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							content: A2(_elm_lang$core$Basics_ops['++'], model.content, '(!BLOCKQUOTE!) (!BLOCKQUOTE!)')
+							content: A2(_elm_lang$core$Basics_ops['++'], model.content, '(!TITLE!) (!TITLE!)')
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
@@ -285,7 +401,7 @@ var _user$project$AddPost$update = F2(
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							content: A2(_elm_lang$core$Basics_ops['++'], model.content, '(!LINE!) (!LINE!)')
+							content: A2(_elm_lang$core$Basics_ops['++'], model.content, '(!LINE!)(!LINE!)')
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
@@ -324,7 +440,7 @@ var _user$project$AddPost$initCommand = _elm_lang$core$Native_List.fromArray(
 		{ctor: '_Tuple2', _0: 'B', _1: _user$project$AddPost$B},
 		{ctor: '_Tuple2', _0: 'I', _1: _user$project$AddPost$I},
 		{ctor: '_Tuple2', _0: 'line', _1: _user$project$AddPost$Line},
-		{ctor: '_Tuple2', _0: 'blockquote', _1: _user$project$AddPost$Blockquote},
+		{ctor: '_Tuple2', _0: 'Title', _1: _user$project$AddPost$Blockquote},
 		{ctor: '_Tuple2', _0: 'highligh', _1: _user$project$AddPost$Highligh},
 		{ctor: '_Tuple2', _0: 'Code', _1: _user$project$AddPost$Code}
 	]);
@@ -362,59 +478,21 @@ var _user$project$AddPost$NewContentTitle = function (a) {
 	return {ctor: 'NewContentTitle', _0: a};
 };
 var _user$project$AddPost$NoOp = {ctor: 'NoOp'};
+var _user$project$AddPost$Titled = {ctor: 'Titled'};
+var _user$project$AddPost$Lined = {ctor: 'Lined'};
+var _user$project$AddPost$Coded = {ctor: 'Coded'};
 var _user$project$AddPost$Italic = {ctor: 'Italic'};
 var _user$project$AddPost$Unstyled = {ctor: 'Unstyled'};
-var _user$project$AddPost$styleParserItalic = function (bolded) {
-	var style = bolded ? _user$project$AddPost$Italic : _user$project$AddPost$Unstyled;
-	return A2(
-		_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
-		A2(
-			_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
-			A2(
-				_Bogdanp$elm_combine$Combine$andThen,
-				_Bogdanp$elm_combine$Combine$end,
-				_elm_lang$core$Basics$always(
-					_Bogdanp$elm_combine$Combine$succeed(
-						_elm_lang$core$Native_List.fromArray(
-							[])))),
-			A2(
-				_Bogdanp$elm_combine$Combine$andThen,
-				_Bogdanp$elm_combine$Combine$string('(!ITALIC!)'),
-				function (_p11) {
-					return _user$project$AddPost$styleParserItalic(
-						_elm_lang$core$Basics$not(bolded));
-				})),
-		A2(
-			_Bogdanp$elm_combine$Combine$andThen,
-			_Bogdanp$elm_combine$Combine_Char$anyChar,
-			function (c) {
-				return A2(
-					_Bogdanp$elm_combine$Combine$andThen,
-					_user$project$AddPost$styleParserItalic(bolded),
-					function (cs) {
-						return _Bogdanp$elm_combine$Combine$succeed(
-							A2(
-								_elm_lang$core$List_ops['::'],
-								{
-									ctor: '_Tuple2',
-									_0: A2(
-										_elm_lang$core$List_ops['::'],
-										c,
-										_elm_lang$core$Native_List.fromArray(
-											[])),
-									_1: style
-								},
-								cs));
-					});
-			}));
-};
 var _user$project$AddPost$Bold = {ctor: 'Bold'};
-var _user$project$AddPost$styleParserBold = F2(
-	function (bolded, italic) {
+var _user$project$AddPost$styleParserBold = F5(
+	function (bolded, italic, coded, lined, titled) {
 		var style = {
-			ctor: '_Tuple2',
+			ctor: '_Tuple5',
 			_0: bolded ? _user$project$AddPost$Bold : _user$project$AddPost$Unstyled,
-			_1: italic ? _user$project$AddPost$Italic : _user$project$AddPost$Unstyled
+			_1: italic ? _user$project$AddPost$Italic : _user$project$AddPost$Unstyled,
+			_2: coded ? _user$project$AddPost$Coded : _user$project$AddPost$Unstyled,
+			_3: lined ? _user$project$AddPost$Lined : _user$project$AddPost$Unstyled,
+			_4: titled ? _user$project$AddPost$Titled : _user$project$AddPost$Unstyled
 		};
 		return A2(
 			_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
@@ -423,29 +501,77 @@ var _user$project$AddPost$styleParserBold = F2(
 				A2(
 					_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
 					A2(
-						_Bogdanp$elm_combine$Combine$andThen,
-						_Bogdanp$elm_combine$Combine$end,
-						_elm_lang$core$Basics$always(
-							_Bogdanp$elm_combine$Combine$succeed(
-								_elm_lang$core$Native_List.fromArray(
-									[])))),
+						_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
+						A2(
+							_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
+							A2(
+								_Bogdanp$elm_combine$Combine_Infix_ops['<|>'],
+								A2(
+									_Bogdanp$elm_combine$Combine$andThen,
+									_Bogdanp$elm_combine$Combine$end,
+									_elm_lang$core$Basics$always(
+										_Bogdanp$elm_combine$Combine$succeed(
+											_elm_lang$core$Native_List.fromArray(
+												[])))),
+								A2(
+									_Bogdanp$elm_combine$Combine$andThen,
+									_Bogdanp$elm_combine$Combine$string('(!BOLD!)'),
+									function (_p11) {
+										return A5(
+											_user$project$AddPost$styleParserBold,
+											_elm_lang$core$Basics$not(bolded),
+											italic,
+											coded,
+											lined,
+											titled);
+									})),
+							A2(
+								_Bogdanp$elm_combine$Combine$andThen,
+								_Bogdanp$elm_combine$Combine$string('(!ITALIC!)'),
+								function (_p12) {
+									return A5(
+										_user$project$AddPost$styleParserBold,
+										bolded,
+										_elm_lang$core$Basics$not(italic),
+										coded,
+										lined,
+										titled);
+								})),
+						A2(
+							_Bogdanp$elm_combine$Combine$andThen,
+							_Bogdanp$elm_combine$Combine$string('(!CODE!)'),
+							function (_p13) {
+								return A5(
+									_user$project$AddPost$styleParserBold,
+									bolded,
+									italic,
+									_elm_lang$core$Basics$not(coded),
+									lined,
+									titled);
+							})),
 					A2(
 						_Bogdanp$elm_combine$Combine$andThen,
-						_Bogdanp$elm_combine$Combine$string('(!BOLD!)'),
-						function (_p12) {
-							return A2(
+						_Bogdanp$elm_combine$Combine$string('(!LINE!)'),
+						function (_p14) {
+							return A5(
 								_user$project$AddPost$styleParserBold,
-								_elm_lang$core$Basics$not(bolded),
-								italic);
+								bolded,
+								italic,
+								coded,
+								_elm_lang$core$Basics$not(lined),
+								titled);
 						})),
 				A2(
 					_Bogdanp$elm_combine$Combine$andThen,
-					_Bogdanp$elm_combine$Combine$string('(!ITALIC!)'),
-					function (_p13) {
-						return A2(
+					_Bogdanp$elm_combine$Combine$string('(!TITLE!)'),
+					function (_p15) {
+						return A5(
 							_user$project$AddPost$styleParserBold,
 							bolded,
-							_elm_lang$core$Basics$not(italic));
+							italic,
+							coded,
+							lined,
+							_elm_lang$core$Basics$not(titled));
 					})),
 			A2(
 				_Bogdanp$elm_combine$Combine$andThen,
@@ -453,7 +579,7 @@ var _user$project$AddPost$styleParserBold = F2(
 				function (c) {
 					return A2(
 						_Bogdanp$elm_combine$Combine$andThen,
-						A2(_user$project$AddPost$styleParserBold, bolded, italic),
+						A5(_user$project$AddPost$styleParserBold, bolded, italic, coded, lined, titled),
 						function (cs) {
 							return _Bogdanp$elm_combine$Combine$succeed(
 								A2(
@@ -473,10 +599,10 @@ var _user$project$AddPost$styleParserBold = F2(
 	});
 var _user$project$AddPost$htmlParser = A2(
 	_Bogdanp$elm_combine$Combine$andThen,
-	A2(_user$project$AddPost$styleParserBold, false, false),
-	function (_p14) {
+	A5(_user$project$AddPost$styleParserBold, false, false, false, false, false),
+	function (_p16) {
 		return _Bogdanp$elm_combine$Combine$succeed(
-			_user$project$AddPost$foldStyleHtml(_p14));
+			_user$project$AddPost$foldStyleHtml(_p16));
 	});
 var _user$project$AddPost$displayBody = function (model) {
 	return A2(

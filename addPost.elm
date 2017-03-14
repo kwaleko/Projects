@@ -18,6 +18,7 @@ type alias Model =
    ,tags : List String
   }
 
+
 type alias Command = List (String,Msg)
 
 --init
@@ -27,9 +28,9 @@ init = (
           ,Cmd.none
        )
 
-initCommand : Command
+initCommand :  Command
 initCommand
-  = [("B",B),("I",I),("line",Line),("blockquote",Blockquote),("highligh",Highligh),("Code",Code)]
+  = [("B",B),("I",I),("line",Line),("Title",Blockquote),("highligh",Highligh),("Code",Code)]
 
 --msg
 type Msg = NoOp | NewContentTitle String | NewContentBody String | Post
@@ -108,12 +109,12 @@ update msg model =
       )
     Blockquote ->
       (
-        { model | content =model.content ++ "(!BLOCKQUOTE!) (!BLOCKQUOTE!)" }
+        { model | content =model.content ++ "(!TITLE!) (!TITLE!)" }
         ,Cmd.none
       )
     Line ->
       (
-        { model | content =model.content ++ "(!LINE!) (!LINE!)" }
+        { model | content =model.content ++ "(!LINE!)(!LINE!)" }
         ,Cmd.none
       )
     Code ->
@@ -158,46 +159,61 @@ commandToMsg : Command -> List Msg
 commandToMsg command =
   List.map (\(a,b) ->b) command
 
-type Style =  Bold| Unstyled | Italic
+type Style =  Bold| Unstyled | Italic |   Coded | Lined | Titled
 
-styleParserBold : Bool ->Bool-> Parser ( List (List Char , (Style,Style)))
-styleParserBold bolded  italic=
-  let
-    style = (if bolded then Bold else Unstyled ,if italic then Italic else Unstyled)
+styleParserBold : Bool ->Bool ->Bool-> Bool-> Bool-> Parser ( List (List Char , (Style,Style,Style,Style,Style)))
+styleParserBold bolded  italic coded lined titled=
+  let --(bold,italic ,code,line ,Titled)
+    style = (if bolded then Bold else Unstyled ,if italic then Italic else Unstyled,if coded then Coded else Unstyled,if lined then Lined else Unstyled,if titled then Titled else Unstyled)
   in
     (end `andThen` always (  succeed ( [] )))
-    <|> (string "(!BOLD!)" `andThen`  \_ -> styleParserBold  (not bolded)  italic )
-    <|> (string "(!ITALIC!)" `andThen`  \_ -> styleParserBold  bolded  (not italic ))
-    <|> ( anyChar `andThen` \c -> (styleParserBold bolded italic )`andThen` \cs -> succeed ((c :: [],style) :: cs) )
+    <|> (string "(!BOLD!)" `andThen`   \_ -> styleParserBold  (not bolded)  italic  coded lined titled )
+    <|> (string "(!ITALIC!)" `andThen`  \_ -> styleParserBold  bolded  (not italic ) coded lined titled)
+    <|> (string "(!CODE!)" `andThen`   \_ -> styleParserBold  bolded   italic  ( not coded) lined titled)
+    <|> (string "(!LINE!)" `andThen`   \_ -> styleParserBold  bolded   italic   coded (not lined) titled)
+    <|> (string "(!TITLE!)" `andThen`  \_ -> styleParserBold  bolded   italic   coded  lined (not titled) )
+    <|> ( anyChar `andThen` \c -> (styleParserBold bolded italic  coded lined  titled)`andThen` \cs -> succeed ((c :: [],style) :: cs) )
 
-
-styleParserItalic : Bool -> Parser ( List (List Char , Style))
-styleParserItalic bolded =
+{-styleParserCode : Bool -> Parser ( List (List Char, Style))
+styleParserCode coded =
   let
-    style = if bolded then Italic else Unstyled
+    style = if coded then Coded else Unstyled
   in
-    (end `andThen` always (  succeed ( [] )))
-    <|> (string "(!ITALIC!)" `andThen`  \_ -> styleParserItalic ( not bolded ) )
-    <|> ( anyChar `andThen` \c -> styleParserItalic bolded `andThen` \cs -> succeed ((c :: [],style) :: cs) )
+  (end `andThen` always (succeed ([])))
+  <|> (anyChar `andThen` \c ->  styleParserCode coded `andThen` \cs -> succeed ((c :: cs  ,style) ) )
+-}
+--styleCodeDecorator : Parser ( List (List Char, Style)) -> Parser ( List (List Char , (Style,Style,Style,Style,Style)))
+--styleCodeDecorator parser =
+--  \
+--styleParserItalic : Bool -> Parser ( List (List Char , Style))
+--styleParserItalic bolded =
+--  let
+--    style = if bolded then Italic else Unstyled
+--  in
+--    (end `andThen` always (  succeed ( [] )))
+--    <|> (string "(!ITALIC!)" `andThen`  \_ -> styleParserItalic ( not bolded ) )
+--    <|> ( anyChar `andThen` \c -> styleParserItalic bolded `andThen` \cs -> succeed ((c :: [],style) :: cs) )
 
 --styleParser = styleParserItalic `andThen` \c -> styleParserBold
 
-foldStyleHtml : List ( List Char , ( Style,Style )) -> List (Html Msg)
+foldStyleHtml : List ( List Char , ( Style,Style,Style,Style,Style) ) -> List (Html Msg)
 foldStyleHtml lst =List.map styleToHtml lst
 
 
-styleToHtml : ( List Char, (Style ,Style)) -> Html Msg
+styleToHtml : ( List Char, (Style ,Style,Style,Style,Style)) -> Html Msg
 styleToHtml (a,b) =
   case b of
-    (Bold,Italic) -> em[] [u [][ text  (String.fromList a)]]
-    (Unstyled,Unstyled) -> text (String.fromList a)
-    (Unstyled,Italic) -> em [] [text (String.fromList a)]
-    (Bold,Unstyled) ->u [][ text  (String.fromList a)]
-    (_,_) -> text ""
-
+    (Bold,Italic,_,_,_) -> strong [] [u [][ text  (String.fromList a)]]
+    (Unstyled,Unstyled,Unstyled,Unstyled,Unstyled) -> text (String.fromList a)
+    (Unstyled,Italic,_,_,_) -> em [] [text (String.fromList a)]
+    (Bold,Unstyled,_,_,_) ->strong [][ text  (String.fromList a)]
+    (_,_,Coded,_,_) -> code [codeStyle][text (String.fromList a)]
+    (_,_,_,Lined,_) -> br [][text "t"]
+    (_,_,_,_,Titled) -> span [titleStyle][text (String.fromList a)]
+    (_,_,_,_,_) -> text ""
 
 htmlParser : Parser (List (Html Msg))
-htmlParser =styleParserBold False False `andThen` (succeed << foldStyleHtml )
+htmlParser =styleParserBold False False  False False False `andThen` (succeed << foldStyleHtml )
 
 runParser : Parser (List (Html Msg)) -> String -> Html Msg
 runParser parser str =
@@ -244,9 +260,26 @@ commandStyle =
     ,("font-size","15px")
       ]
 
+codeStyle =
+  style [
+    ("background-color","#becad8")
+  ]
+
+markStyle =
+  style [
+    ("background-color","yellow")
+  ]
+
 postButton =
   style [
      ("height","50px")
     ,("width","80px")
     ,("font-size","15px")
+  ]
+
+titleStyle =
+  style [
+    ( "letter-spacing","5px")
+    ,("text-decoration","bold")
+    ,("font-size","30px")
   ]
