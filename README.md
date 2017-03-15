@@ -11,6 +11,8 @@ for exmaple :
 - if the user enter /* bold {- Bold and higlight {- /* it should be parsed to : div [] [B[][ text "Bold" , mark[] [text "Bold and higlight"]]]
 
 using a regular expression to achieve the above very limited and overcomple in such case
+
+## Solution
 the solution was to use [parser combinator](https://en.wikipedia.org/wiki/Parser_combinator)
 for this given problem, I have used [combine library](http://package.elm-lang.org/packages/Bogdanp/elm-combine/latest/Combine)
 
